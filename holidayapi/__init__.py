@@ -2,23 +2,22 @@ import json
 import requests
 
 class v1:
-    key = None
-
     def __init__(self, key):
         self.key = key
 
     def holidays(self, parameters):
         url = 'https://holidayapi.com/v1/holidays?'
 
-        if parameters.has_key('key') is False:
+        if not parameters.get('key'):
             parameters['key'] = self.key
+        else:
+            assert self.key == parameters['key'], 'keys supplied as an argument & in `parameters` differ. \n Provide at only one place'
 
         response = requests.get(url, params=parameters);
-        data     = json.loads(response.text)
-
-        if response.status_code != 200:
-            if data.has_key('error') is False:
+        data = response.json()
+        
+        if not response.ok:
+            if not data.get('error'):
                 data['error'] = 'Unknown error.'
 
         return data
-
