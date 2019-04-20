@@ -15,7 +15,7 @@ class v1:
 
         response = requests.get(url, params=parameters);
         data = response.json()
-        
+
         if not response.ok:
             if not data.get('error'):
                 data['error'] = 'Unknown error.'
