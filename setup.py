@@ -9,6 +9,9 @@ setup(
     author_email='hello@holidayapi.com',
     keywords=['python','holidayapi','holiday','api'],
     license='MIT',
-    packages=['holidayapi']
+    packages=['holidayapi'],
+    install_requires=[
+        'requests',
+    ],
 )
 
